@@ -1,2 +1,2 @@
 #FROM gcr.io/authenticated-image-pulling/alpine:3.7
-FROM  k8s.gcr.io/e2e-test-images/nginx:1.14-1
+FROM  invalid.com/invalid/alpine:3.1
