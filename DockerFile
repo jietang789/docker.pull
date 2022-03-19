@@ -1,0 +1,4 @@
+FROM docker pull gcr.io/authenticated-image-pulling/alpine:3.7
+FROM docker pull gcr.io/authenticated-image-pulling/windows-nanoserver:v1
+FROM docker pull gcr.io/k8s-authenticated-test/agnhost:2.6
+FROM docker pull invalid.com/invalid/alpine:3.1
