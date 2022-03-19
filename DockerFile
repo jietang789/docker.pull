@@ -1,2 +1,3 @@
-FROM gcr.io/authenticated-image-pulling/alpine:3.7@sha256:081242c3debab187a29c0acb8e70d5bccf849ed313015316098359e3af6c643c
+FROM gcr.io/authenticated-image-pulling/alpine:3.7
+
 MAINTAINER tangjie <tangjie45@huawei.com>
