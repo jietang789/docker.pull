@@ -88,3 +88,12 @@ rumprun-packages： rumprun-packages 的一个分支，其中包含要在 Solo5 
 有关 的更多信息ukvm，请查看我们的 HotCloud '16 论文Unikernel Monitors: Extending Minimalism Outside the Box 或 Github 上的Solo5项目。 ↩
 
 7.
+Solo5 最初是由 IBM Research 的 Dan Williams 发起的一个项目，旨在移植 MirageOS 以在 Linux/KVM 管理程序上运行。从那时起，它已经发展成为一个更通用的沙盒执行环境，适合运行使用各种 unikernels（又名库操作系统）构建的应用程序，针对不同主机操作系统和虚拟机管理程序上的不同沙盒技术。
+
+Solo5 的一些独特功能：
+
+一个公共（“面向客户”）API，旨在轻松移植现有和未来的 unikernel-native 应用程序，
+上述 API 有助于实现（“面向主机”） 绑定和招标，其设计具有隔离性、最小的攻击面 以及易于移植到不同的沙盒技术或 主机系统，
+支持 unikernels 的实时和事后调试，
+快速“启动”时间（相当于加载标准用户进程），适用于“功能即服务”用例。
+寻找“ukvm 监视器”？自 Solo5 0.4.0 以来，我们的术语发生了变化，以更好地反映项目的预期架构和长期目标。过去被称为监视器的东西现在被称为招标。作为此更改的一部分，ukvm目标和 监视器已重命名为hvt（“硬件虚拟化招标”），以反映它们不再特定于 KVM 管理程序，并允许开发进一步的招标，例如spt。
