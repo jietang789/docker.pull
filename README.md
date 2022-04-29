@@ -27,3 +27,17 @@ Library Components are Unikraft modules, each of which provides some piece of fu
 Configuration. Inspired by Linux’s Kconfig system, this Unikraft uses this approach to quickly and easily allow users to pick and choose which libraries to include in the build process, as well as to configure options for each of them, where available. Like Kconfig, the menu keeps track of dependencies and automatically selects them where applicable.
 
 Build Tools. The core of Unikraft is a suite of tools which aid in the creation of the final unikernel image. Based on make, it takes care of compiling and linking all the relevant modules and of producing images for the different platforms selected via the configuration menu.
+
+
+5.
+Nabla containers: a new approach to container isolation
+Despite all of the advantages that have resulted in an industry-wide shift towards containers, containers have not been accepted as isolated sandboxes, which is crucial for container-native clouds. We introduce nabla containers, a new type of container designed for strong isolation on a host.
+
+Nabla containers achieve isolation by adopting a strategy of attack surface reduction to the host. A visualization of this approach appears in this figure:
+
+A containerized application can avoid making a Linux system call if it links to a library OS component that implements the system call functionality. Nabla containers use library OS (aka unikernel) techniques, specifically those from the Solo5 project, to avoid system calls and thereby reduce the attack surface. 
+
+6.
+Nabla containers only use 7 system calls; all others are blocked via a Linux seccomp policy. An overview of the internals of a nabla container appears in this figure:
+
+For the curious, here are the allowed syscalls: read, write, exit_group, clock_gettime, ppoll, pwrite64, and pread64. They are restricted to specific file descriptors (already opened before enabling seccomp). They originate from the hypercall implementations of the ukvm unikernel monitor.1 Check out the code for more specifics.
