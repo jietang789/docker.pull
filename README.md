@@ -41,3 +41,50 @@ A containerized application can avoid making a Linux system call if it links to 
 Nabla containers only use 7 system calls; all others are blocked via a Linux seccomp policy. An overview of the internals of a nabla container appears in this figure:
 
 For the curious, here are the allowed syscalls: read, write, exit_group, clock_gettime, ppoll, pwrite64, and pread64. They are restricted to specific file descriptors (already opened before enabling seccomp). They originate from the hypercall implementations of the ukvm unikernel monitor.1 Check out the code for more specifics.
+
+
+Nabla 容器：容器隔离的新方法
+尽管所有这些优势都导致了整个行业向容器的转变，但容器并未被接受为孤立的沙箱，这对于容器原生云至关重要。我们介绍了nabla 容器，这是一种为主机上的强隔离而设计的新型容器。
+
+Nabla 容器通过对主机采取减少攻击面的策略来实现隔离。此方法的可视化显示在此图中：
+
+nabla 容器
+
+如果容器化应用程序链接到实现系统调用功能的库操作系统组件，则它可以避免进行 Linux 系统调用。Nabla 容器使用库操作系统（又名 unikernel）技术，特别是来自Solo5 项目的技术，以避免系统调用，从而减少攻击面。Nabla 容器仅使用 7 个系统调用；所有其他人都通过 Linux seccomp 策略被阻止。下图显示了 nabla 容器的内部结构：
+
+nabla-internals
+
+对于好奇的人，这里是允许的系统调用：read, write, exit_group, clock_gettime, ppoll, pwrite64, 和 pread64。它们仅限于特定的文件描述符（在启用 seccomp 之前已经打开）。它们源自ukvmunikernel 监视器的超调用实现。1查看代码 了解更多详情。
+
+nabla 容器真的更孤立吗？
+nabla 容器中的隔离来自通过阻止系统调用来限制对主机内核的访问。我们通过测量容器化应用程序进行的系统调用数量以及相应地访问了多少内核函数，准确测量了 nabla 容器和标准容器对内核常见应用程序的访问量。此图总结了一些应用程序的结果：
+
+nabla 隔离
+
+进一步的测量和结果以及重现它们的脚本驻留在 nabla-measurements 存储库中。
+
+存储库概述
+更多信息出现在与 nabla 容器相关的每个单独的存储库中。此外， 本文将引导您完成运行第一个 nabla 容器的过程：
+
+runnc：是 nabla 容器的 OCI 接口容器运行时。从这里开始运行 nabla 容器！
+
+nabla-demo-apps：展示如何构建容器化为 nabla 容器的示例应用程序。有助于了解如何通过从现有的 nabla 基础 Docker 映像构建容器化您自己的应用程序。
+
+nabla-measurements：包含 nabla 容器的隔离测量，并与标准容器和其他容器隔离方法（例如 kata 容器和 gvisor）进行比较。
+
+如果您想更深入，请查看以下存储库：
+
+nabla-base-build：展示如何构建 nabla 基础 Docker 镜像。有助于了解如何使用 rumprun 将应用程序或运行时移植为新的 nabla 基础。
+
+solo5：Solo5 (http://github.com/Solo5/solo5) 的一个临时分支，其中包含“nabla-run”，这是一个基于 seccomp 的 Solo5 招标。我们正在努力在上游添加这个新的招标变更。
+
+rumprun : Rumprun 的一个分支，使 rumprun 可以在 Solo5 界面上运行。
+
+rumprun-packages： rumprun-packages 的一个分支，其中包含要在 Solo5 上运行的目标。
+
+限制
+主要限制是 Nabla 运行时 (runnc) 仅支持为 nabla 构建的图像（请参阅 nabla-base-build）。此处列出了其他限制 。
+
+有关 的更多信息ukvm，请查看我们的 HotCloud '16 论文Unikernel Monitors: Extending Minimalism Outside the Box 或 Github 上的Solo5项目。 ↩
+
+7.
