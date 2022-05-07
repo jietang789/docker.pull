@@ -9,3 +9,6 @@ CDEvents是连续交付事件的通用规范，支持在完整的软件生产生
 
 CDF项目全景图
 https://landscape.cd.foundation/?grouping=organization&organization=continuous-delivery-foundation-cdf&style=borderless
+
+Apache 孵化项目清单链接
+https://incubator.apache.org/projects/#current
