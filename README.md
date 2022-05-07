@@ -6,3 +6,6 @@ Kubernetes上构建容器图像的框架。
 
 
 CDEvents是连续交付事件的通用规范，支持在完整的软件生产生态系统中实现互操作性
+
+CDF项目全景图
+https://landscape.cd.foundation/?grouping=organization&organization=continuous-delivery-foundation-cdf&style=borderless
