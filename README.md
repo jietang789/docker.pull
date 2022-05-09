@@ -51,3 +51,4 @@ PipelineRunController 监听 PipelineRun 对象的变化。在它的 reconcile �
 TaskRunController 监听 TaskRun 对象的变化。在它的 reconcile 逻辑中将 TaskRun 和对应 Task 转化为可执行的 Pod ，由 kubernetes 调度执行。利用 Kubernetes 的 OwnerReference 机制， PipelineRun Own TaskRun、TaskRun Own Pod、Pod 状态变更时，触发 TaskRun 的 reconcile 逻辑， TaskRun 状态变更时触发 PipelineRun 的 reconcile 逻辑。
 
 https://tekton.dev/docs/getting-started/tasks/
+https://github.com/tektoncd
